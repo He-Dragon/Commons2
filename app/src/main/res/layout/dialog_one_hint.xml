@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:layout_margin="@dimen/margin_20"
+    android:background="@null">
+
+
+<LinearLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:background="@drawable/shape_hint_dialog_bg"
+    android:orientation="vertical">
+    <TextView
+        android:id="@+id/hint_title_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:textColor="@color/black"
+        android:textSize="20sp"
+        android:background="@color/white"
+        android:layout_margin="@dimen/margin_10"/>
+
+
+    <TextView
+        android:id="@+id/hint_content_tv"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_marginLeft="@dimen/margin_10"
+        android:layout_marginRight="@dimen/margin_10"
+        android:layout_marginBottom="@dimen/margin_15"
+        android:textColor="@color/black"
+        android:textSize="@dimen/text_size_16"
+        android:background="@color/white"/>
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="0.8dp"
+        android:background="@color/grey" />
+
+
+        <Button
+            android:id="@+id/hint_btn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_margin="10dp"
+            android:text="确认"
+            android:textColor="@color/blue"
+            android:textSize="18sp"
+            android:background="@color/white"/>
+</LinearLayout>
+</LinearLayout>
