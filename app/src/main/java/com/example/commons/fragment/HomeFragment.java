@@ -1,19 +1,18 @@
 package com.example.commons.fragment;
 
-import android.content.Intent;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.Nullable;
-import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 
 import com.example.commons.R;
-//import com.example.commons.TextActivity;
 import com.example.commons.base.BaseFragment;
 import com.example.commons.utils.CustomDialog;
+
+//import com.example.commons.TextActivity;
 //import com.example.commons.utils.CustomDialog;
 
 //import org.jsoup.Jsoup;
@@ -30,6 +29,9 @@ import com.example.commons.utils.CustomDialog;
 
 public class HomeFragment extends BaseFragment {
 
+
+    private Button mButton;
+
     public static HomeFragment newInstance() {
         Bundle args = new Bundle();
         HomeFragment homeFragment = new HomeFragment();
@@ -37,24 +39,32 @@ public class HomeFragment extends BaseFragment {
         return homeFragment;
     }
 
-
-    @Nullable
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        setContentView(R.layout.fagment_home);
-        initView();
-        return getContentView();
+    public int getContentView() {
+        return R.layout.fagment_home;
     }
 
     @Override
     public void initView() {
+        mButton = F(R.id.button);
+    }
 
-        CustomDialog.createLodingDialog(getActivity()).show();
-//        findViewById(R.id.button).setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View v) {
-//                new Thread() {
+    @Override
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListener() {
+        C(mButton);
+    }
+
+    @Override
+    public void procssClick(View v) {
+        switch (v.getId()) {
+            case R.id.button:
+                CustomDialog.createLodingDialog(getActivity()).show();//加载框
+//        new Thread() {
 //                    @Override
 //                    public void run() {
 //                        super.run();
@@ -79,19 +89,10 @@ public class HomeFragment extends BaseFragment {
 //
 //                    }
 //                }.start();
-//            }
-//        });
+                break;
+        }
 
     }
 
-    @Override
-    public void setViewData() {
-
-    }
-
-    @Override
-    public void loadData() {
-        Log.d(TAG, "loadData: HomeFragment");
-    }
 
 }

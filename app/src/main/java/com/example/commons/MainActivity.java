@@ -1,21 +1,14 @@
 package com.example.commons;
 
-import android.os.Bundle;
-import android.os.Handler;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
-import android.support.v4.app.FragmentPagerAdapter;
 import android.util.Log;
-import android.widget.RadioGroup;
+import android.view.View;
 
-import com.example.commons.base.BaseActivity;
 import com.example.commons.base.BaseFragmentActivity;
 import com.example.commons.fragment.HomeFragment;
 import com.example.commons.fragment.PersonFragment;
-import com.example.commons.utils.CustomDialog;
 import com.example.commons.view.BarEntity;
 import com.example.commons.view.BottomTabBar;
-import com.example.commons.view.NoScrollViewPager;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -32,14 +25,9 @@ public class MainActivity extends BaseFragmentActivity implements BottomTabBar.O
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-    }
-
-    @Override
     public void initView() {
         bars = new ArrayList<>();
-        bottomTabBar = (BottomTabBar) findViewById(R.id.bottom_tab_bar);
+        bottomTabBar = F(R.id.bottom_tab_bar);
         manager = getSupportFragmentManager();
         bottomTabBar.setManager(manager);
         bottomTabBar.setOnSelectListener(this);
@@ -52,8 +40,18 @@ public class MainActivity extends BaseFragmentActivity implements BottomTabBar.O
     }
 
     @Override
-    public void setViewData() {
+    public void initData() {
+
     }
+
+    @Override
+    public void initListener() {
+    }
+
+    @Override
+    public void procssClick(View v) {
+    }
+
 
     @Override
     public int getContentViewId() {

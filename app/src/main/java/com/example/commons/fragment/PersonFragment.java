@@ -23,13 +23,10 @@ public class PersonFragment extends BaseFragment {
         return homeFragment;
     }
 
-    @Nullable
+
     @Override
-    public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        super.onCreateView(inflater, container, savedInstanceState);
-        setContentView(R.layout.fagment_person);
-        initView();
-        return getContentView();
+    public int getContentView() {
+        return R.layout.fagment_person;
     }
 
     @Override
@@ -38,14 +35,20 @@ public class PersonFragment extends BaseFragment {
     }
 
     @Override
-    public void setViewData() {
+    public void initData() {
 
     }
 
     @Override
-    public void loadData() {
-        Log.d(TAG, "loadData: PersonFragment");
+    public void initListener() {
+
     }
+
+    @Override
+    public void procssClick(View v) {
+
+    }
+
 
     @Override
     public void onResume() {

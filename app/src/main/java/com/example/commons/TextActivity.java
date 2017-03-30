@@ -2,6 +2,7 @@ package com.example.commons;
 
 import android.os.Bundle;
 import android.os.PersistableBundle;
+import android.view.View;
 
 import com.example.commons.base.BaseFragmentActivity;
 
@@ -22,7 +23,17 @@ public class TextActivity extends BaseFragmentActivity {
     }
 
     @Override
-    public void setViewData() {
+    public void initData() {
+
+    }
+
+    @Override
+    public void initListener() {
+
+    }
+
+    @Override
+    public void procssClick(View v) {
 
     }
 

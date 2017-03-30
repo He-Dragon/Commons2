@@ -4,7 +4,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
+import android.util.SparseArray;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,34 +14,35 @@ import android.widget.Toast;
  * Created by 阿龙 on 2017/2/28.
  */
 
-public abstract class BaseFragment extends Fragment {
+public abstract class BaseFragment extends Fragment implements View.OnClickListener {
 
-    private View view ;
-    private LayoutInflater inflater;
-    private  ViewGroup container ;
+    private View view;
+    private SparseArray<View> mViews;
 
     protected Toast xToast;
     public static final String TAG = ">>>>>>>>>>>>>";
 
 
+    @Override
+    public void onClick(View v) {
+        procssClick(v);
+    }
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
-        this.inflater = inflater ;
-        this.container = container ;
-        return super.onCreateView(inflater, container, savedInstanceState);
-
-    }
-
-
-
-    public View setContentView(int resourceId) {
-        view = inflater.inflate(resourceId, container, false);
+        if (view == null) {
+            mViews = new SparseArray<>();
+            view = inflater.inflate(getContentView(), container, false);
+            initView();
+            initData();
+            initListener();
+        }
         return view;
+
     }
-    public View getContentView(){
-        return  this.view ;
-    }
+
+    public abstract int getContentView();
 
     /**
      * 初始化View
@@ -51,11 +52,43 @@ public abstract class BaseFragment extends Fragment {
     /**
      * 给控件设置数据
      */
-    public abstract void setViewData();
+    public abstract void initData();
+
     /**
-     * 加载数据
+     * 设置监听
      */
-    public abstract void loadData();
+    public abstract void initListener();
+    /**
+     * 点击事件点击回调
+     */
+    public abstract void procssClick(View v);
+
+    /**
+     * 通过ID找到view
+     */
+    public <E extends View> E F(int viewId) {
+        E view = (E) mViews.get(viewId);
+        if (view == null){
+            view = (E) findViewById(viewId);
+            mViews.put(viewId,view);
+        }
+        return view;
+    }
+    /**
+     * 获取控件id
+     *
+     * @param id
+     * @return
+     */
+    public View findViewById(int id) {
+        return view.findViewById(id);
+    }
+    /**
+     * 通过view设置点击监听
+     */
+    public <E extends View> void C(E view){
+        view.setOnClickListener(this);
+    }
 
 
     /***
@@ -74,12 +107,4 @@ public abstract class BaseFragment extends Fragment {
     }
 
 
-    /**
-     * 获取控件id
-     * @param id
-     * @return
-     */
-    public View findViewById(int id){
-        return view.findViewById(id) ;
-    }
 }

@@ -7,6 +7,7 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.support.v7.app.AppCompatActivity;
+import android.util.SparseArray;
 import android.view.View;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,20 +26,29 @@ import java.util.Map;
  * Created by 阿龙 on 2017/2/15.
  */
 
-public abstract class BaseActivity extends AppCompatActivity {
+public abstract class BaseActivity extends AppCompatActivity implements View.OnClickListener {
 
     protected Toast xToast;
     protected Context mContext;
     private static View decorView = null;
     public static final String TAG = ">>>>>>>>>>>>>";
+    private SparseArray<View> mViews;
 
+
+    @Override
+    public void onClick(View v) {
+        procssClick(v);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
+        mViews = new SparseArray<>();
         setContentView(getContentViewId());
         setStatusBar(this);
         mContext = this;
         initView();
+        initData();
+        initListener();
 //        /**
 //         * 网络请求实列
 //         * */
@@ -69,12 +79,39 @@ public abstract class BaseActivity extends AppCompatActivity {
     /**
      * 给控件设置数据
      */
-    public abstract void setViewData();
+    public abstract void initData();
 
+    /**
+     * 设置监听
+     */
+    public abstract void initListener();
+    /**
+     * 点击事件点击回调
+     */
+    public abstract void procssClick(View v);
     /**
      * 布局
      */
     public abstract int getContentViewId();
+
+    /**
+     * 通过ID找到view
+     */
+    public <E extends View> E F(int viewId) {
+        E view = (E) mViews.get(viewId);
+        if (view == null){
+            view = (E) findViewById(viewId);
+            mViews.put(viewId,view);
+        }
+        return view;
+    }
+    /**
+     * 通过view设置点击监听
+     */
+    public <E extends View> void C(E view){
+        view.setOnClickListener(this);
+    }
+
 
     /***
      * 显示Toast
@@ -120,6 +157,8 @@ public abstract class BaseActivity extends AppCompatActivity {
             //在4.0以下就没有setSystemUiVisibility这个方法（隐藏状态栏（StatusBar））
         }
     }
+
+
 
 
 }
