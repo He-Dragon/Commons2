@@ -17,9 +17,12 @@ import com.example.commons.http.RxRetrofitClient;
 import com.example.commons.http.service.HttpService;
 import com.example.commons.http.subscriber.CommonsSubscriber;
 import com.example.commons.http.subscriber.RxHelper;
+import com.example.commons.http.subscription.RxSubscriptionManager;
 
 import java.util.HashMap;
 import java.util.Map;
+
+import rx.Subscription;
 
 
 /**
@@ -52,9 +55,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //        /**
 //         * 网络请求实列
 //         * */
-//        Map<String, String> map = new HashMap<String, String>();
+//        Map<String, String> map = new HashMap<>();
 //        map.put("key", "valus");
-//        RxRetrofitClient.getInstence()
+//         Subscription subscription = RxRetrofitClient.getInstence()
 //                .create(HttpService.class)
 //                .login(map)
 //                .compose(RxHelper.<BaseHttpResult>io_main())
@@ -69,6 +72,10 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
 //
 //                    }
 //                });
+//
+//        RxSubscriptionManager.get().add("key",subscription);//添加，在请求时候添加
+//        RxSubscriptionManager.get().remove("key");//取消订阅，一般在onDestroy中取消
+
     }
 
     /**
@@ -159,6 +166,9 @@ public abstract class BaseActivity extends AppCompatActivity implements View.OnC
     }
 
 
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
 
-
+    }
 }

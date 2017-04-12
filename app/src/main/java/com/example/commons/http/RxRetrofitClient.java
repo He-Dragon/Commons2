@@ -6,11 +6,15 @@ import java.io.File;
 import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
+import okhttp3.Call;
 import okhttp3.Interceptor;
+import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
+import okhttp3.RequestBody;
 import okhttp3.Response;
 import okhttp3.logging.HttpLoggingInterceptor;
+import okio.BufferedSink;
 import retrofit2.Retrofit;
 import retrofit2.adapter.rxjava.RxJavaCallAdapterFactory;
 import retrofit2.converter.gson.GsonConverterFactory;
@@ -60,7 +64,28 @@ public class RxRetrofitClient {
 //                    //设置请求的拦截器
 //                    .addInterceptor(REWRITE_CACHE_CONTROL_INTERCEPTOR)
                 .build();
+        Request request = new Request.Builder()
+                .url("")
+                .post(new RequestBody() {
+                    @Override
+                    public MediaType contentType() {
+                        return null;
+                    }
 
+                    @Override
+                    public void writeTo(BufferedSink sink) throws IOException {
+
+                    }
+                })
+                .build();
+
+        Call call = okHttpClient.newCall(request);
+        try {
+            Response response = call.execute();
+            System.out.println(response.body().string());
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
         mRetrofit = new Retrofit.Builder()
                 .baseUrl(basUrl)
                 .client(okHttpClient)

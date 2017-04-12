@@ -3,7 +3,10 @@ package com.example.commons;
 import android.os.Bundle;
 import android.os.PersistableBundle;
 import android.view.View;
+import android.widget.ImageView;
 
+import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.example.commons.base.BaseFragmentActivity;
 
 /**
@@ -14,7 +17,6 @@ public class TextActivity extends BaseFragmentActivity {
     @Override
     public void onCreate(Bundle savedInstanceState, PersistableBundle persistentState) {
         super.onCreate(savedInstanceState, persistentState);
-
     }
 
     @Override

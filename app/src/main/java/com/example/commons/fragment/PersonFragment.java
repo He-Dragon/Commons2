@@ -56,6 +56,11 @@ public class PersonFragment extends BaseFragment {
         Log.d(TAG, "onResume: ");
     }
 
+    /**
+     * 用getSupportFragmentManager().beginTransaction()方法的show和hind方法第一次创建frgment的时候走生命周期
+     * ，之后都不会走生命周期，用frgment的onHiddenChanged方法来控制，如果已经加载到FragmentTransaction后，
+     * 页面已经处于可见状态的时候，hidden为true
+     * */
     @Override
     public void onHiddenChanged(boolean hidden) {
         super.onHiddenChanged(hidden);
